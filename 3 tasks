@@ -1,0 +1,328 @@
+Task-1:- Guessing the number
+package internship1;
+import java.util.Random;
+import java.util.Scanner;
+
+public class java1 {
+
+	public static void main(String[] args) {
+		        Scanner scanner = new Scanner(System.in);
+		        Random random = new Random();
+		        
+		        int minRange = 1;
+		        int maxRange = 100;
+		        int maxAttempts = 5;
+		        int rounds = 0;
+		        int score = 0;
+
+		        System.out.println("Welcome to the Number Guessing Game!");
+
+		        do {
+		            int targetNumber = random.nextInt(maxRange - minRange + 1) + minRange;
+		            int attempts = 0;
+		            boolean guessedCorrectly = false;
+
+		            System.out.println("\nRound " + (rounds + 1) + ": Guess the number between " + minRange + " and " + maxRange);
+
+		            while (attempts < maxAttempts) {
+		                System.out.print("Enter your guess: ");
+		                int userGuess = scanner.nextInt();
+		                attempts++;
+
+		                if (userGuess == targetNumber) {
+		                    guessedCorrectly = true;
+		                    break;
+		                } else if (userGuess < targetNumber) {
+		                    System.out.println("Too low! Try again.");
+		                } else {
+		                    System.out.println("Too high! Try again.");
+		                }
+		            }
+
+		            if (guessedCorrectly) {
+		                System.out.println("Congratulations! You guessed the correct number in " + attempts + " attempts.");
+		                score += maxAttempts - attempts + 1;
+		            } else {
+		                System.out.println("Sorry! You couldn't guess the number. The correct number was: " + targetNumber);
+		            }
+
+		            System.out.print("Do you want to play again? (yes/no): ");
+		            String playAgain = scanner.next().toLowerCase();
+
+		            if (playAgain.equals("yes")) {
+		                rounds++;
+		            } else {
+		                System.out.println("\nGame Over! Your total score is: " + score);
+		            }
+		        } while (rounds > 0);
+
+		        scanner.close();
+		    }
+		
+
+
+	}
+
+
+
+Output:
+   Welcome to the Number Guessing Game!
+
+Round 1: Guess the number between 1 and 100
+Enter your guess: 65
+Too high! Try again.
+Enter your guess: 23
+Too low! Try again.
+Enter your guess: 10
+Too low! Try again.
+Enter your guess: 100
+Too high! Try again.
+Enter your guess: 52
+Too high! Try again.
+Sorry! You could not guess the number. The correct number was: 46
+Do you want to play again? (yes/no):
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            Task2:-Student grade calculator
+
+package internship1;
+import java.util.Scanner;
+
+public class java2 {
+
+	public static void main(String[] args) {
+		
+		        Scanner scanner = new Scanner(System.in);
+
+		        // Constants for grade boundaries
+		        final double A_GRADE = 90.0;
+		        final double B_GRADE = 80.0;
+		        final double C_GRADE = 70.0;
+		        final double D_GRADE = 60.0;
+
+		        System.out.println("Grade Calculator\n");
+
+		        // Input: Take marks obtained in each subject
+		        System.out.print("Enter the number of subjects: ");
+		        int numSubjects = scanner.nextInt();
+
+		        double totalMarks = 0;
+
+		        // Loop to input marks for each subject
+		        for (int i = 1; i <= numSubjects; i++) {
+		            System.out.print("Enter marks obtained in subject " + i + ": ");
+		            double marks = scanner.nextDouble();
+		            
+		            // Validate marks (assuming marks are out of 100)
+		            if (marks < 0 || marks > 100) {
+		                System.out.println("Invalid marks! Marks should be between 0 and 100.");
+		                i--; // Decrement the loop counter to re-enter marks for the same subject
+		            } else {
+		                totalMarks += marks;
+		            }
+		        }
+
+		        // Calculate Total Marks
+		        System.out.println("\nTotal Marks: " + totalMarks);
+
+		        // Calculate Average Percentage
+		        double averagePercentage = totalMarks / numSubjects;
+		        System.out.println("Average Percentage: " + averagePercentage + "%");
+
+		        // Grade Calculation: Assign grades based on average percentage
+		        char grade;
+		        if (averagePercentage >= A_GRADE) {
+		            grade = 'A';
+		        } else if (averagePercentage >= B_GRADE) {
+		            grade = 'B';
+		        } else if (averagePercentage >= C_GRADE) {
+		            grade = 'C';
+		        } else if (averagePercentage >= D_GRADE) {
+		            grade = 'D';
+		        } else {
+		            grade = 'F';
+		        }
+
+		        // Display Results
+		        System.out.println("Grade: " + grade);
+
+		        scanner.close();
+		    }
+		
+
+
+	}
+
+Output:
+   Grade Calculator
+
+Enter the number of subjects: 3
+Enter marks obtained in subject 1: 20
+Enter marks obtained in subject 2: 20
+Enter marks obtained in subject 3: 100
+
+Total Marks: 140.0
+Average Percentage: 46.666666666666664%
+Grade: F
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                 Task:-3 ATM Interface
+package intern1;
+import java.util.Scanner;
+public class java3 {
+	    public static void main(String[] args) {
+	        System.out.println("Welcome to the ATM Machine!");
+	        Scanner scanner = new Scanner(System.in);
+
+	        double balance = 1000.0; // Initial balance
+
+	        int choice;
+	        // Display menu
+	        do {
+	            System.out.println("\nOptions:");
+	            System.out.println("1. Withdraw");
+	            System.out.println("2. Deposit");
+	            System.out.println("3. Check Balance");
+	            System.out.println("4. Exit");
+	            System.out.print("Enter your choice: ");
+
+	            // Validate user input
+	            while (!scanner.hasNextInt()) {
+	                System.out.println("Invalid input. Please enter a number.");
+	                scanner.next(); // consume the invalid input
+	            }
+	            choice = scanner.nextInt();
+
+	            // Process user choice
+	            switch (choice) {
+	                case 1:
+	                    System.out.print("Enter withdrawal amount: ");
+	                    double withdrawAmount = scanner.nextDouble();
+	                    if (withdrawAmount > 0 && withdrawAmount <= balance) {
+	                        balance -= withdrawAmount;
+	                        System.out.println("Withdrawal successful. New balance: " + balance);
+	                    } else {
+	                        System.out.println("Invalid withdrawal amount or insufficient funds.");
+	                    }
+	                    break;
+	                case 2:
+	                    System.out.print("Enter deposit amount: ");
+	                    double depositAmount = scanner.nextDouble();
+	                    if (depositAmount > 0) {
+	                        balance += depositAmount;
+	                        System.out.println("Deposit successful. New balance: " + balance);
+	                    } else {
+	                        System.out.println("Invalid deposit amount.");
+	                    }
+	                    break;
+	                case 3:
+	                    System.out.println("Current Balance: " + balance);
+	                    break;
+	                case 4:
+	                    System.out.println("Thank you for using the ATM. Goodbye!");
+	                    break;
+	                default:
+	                    System.out.println("Invalid choice. Please enter a valid option.");
+	            }
+	        } while (choice != 4);
+
+	        scanner.close();
+	    }
+	}
+
+
+
+Output:
+Welcome to the ATM Machine!
+
+Options:
+1. Withdraw
+2. Deposit
+3. Check Balance
+4. Exit
+Enter your choice: 1
+Enter withdrawal amount: 50000
+Withdrawal successful. New balance: 50000.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
